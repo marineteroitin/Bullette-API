@@ -4,6 +4,8 @@ const cors = require("cors");
 
 const app = express();
 
+require('dotenv').config();
+
 // déclaration du port
 const port = process.env.PORT || 3000;
 
@@ -17,6 +19,6 @@ import routes from "./endpoints/index";
 app.use(routes);
 
 //launch the server
-app.listen(port, function () {
+module.exports = app.listen(port, function () {
     console.log("Server is running on port " + port);
 });

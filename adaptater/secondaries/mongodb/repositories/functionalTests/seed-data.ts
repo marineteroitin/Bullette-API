@@ -18,14 +18,13 @@ module.exports.testUsers = testUsers;
 This method deletes all of the current users and creates the test users.
 */
 
-const populateTestUsers = (done) => {
+const populateTestUsers = (done: any) => {
 
-    // User.deleteMany({}).then(() => {
+    User.deleteMany({}).then(() => {
 
     var userOne = new User(testUsers[0]).save();
-
-    //  return Promise.all([userOne]);
-    //  }).then(() => done());
+      return Promise.all([userOne]);
+    }).then(() => done());
 
 };
 

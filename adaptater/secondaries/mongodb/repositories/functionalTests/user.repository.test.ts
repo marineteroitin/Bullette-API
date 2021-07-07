@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { app } = require('../../../../primaries/rest/server');
+const app = require('../../../../primaries/rest/server');
 //const User = require('../User.repository');
 
 const Seed = require('./seed-data');
