@@ -11,7 +11,7 @@ export default class UserRepositoryMongodb implements UserRepository {
     }
 
 
-    async existByEmail(email: any): Promise<boolean> {
+    async getUserByEmail(email: any): Promise<boolean> {
         try {
             return await UserMongodb.findOne({ email: email })
         } catch (error) {

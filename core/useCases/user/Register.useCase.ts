@@ -16,7 +16,7 @@ export default class RegisterUseCase {
 
     private async checkBusinessRules(user: User): Promise<void> {
         if(user.email) {
-            if (await this.userRepository.existByEmail(user.email)) {
+            if (await this.userRepository.getUserByEmail(user.email)) {
                 throw new BusinessException(
                     "Un utilisateur existe déjà avec cet email"
                 );

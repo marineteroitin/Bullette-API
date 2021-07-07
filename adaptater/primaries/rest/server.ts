@@ -4,6 +4,9 @@ const cors = require("cors");
 
 const app = express();
 
+//want to be able to access the app in our tests
+module.exports = { app };
+
 require('dotenv').config();
 
 // déclaration du port
@@ -19,6 +22,5 @@ import routes from "./endpoints/index";
 app.use(routes);
 
 //launch the server
-module.exports = app.listen(port, function () {
-    console.log("Server is running on port " + port);
-});
+app.listen(port);
+

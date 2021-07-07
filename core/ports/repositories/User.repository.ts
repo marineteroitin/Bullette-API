@@ -7,7 +7,7 @@ export default interface UserRepository {
     login(email: any, password: any): Promise<User>;
     googleAuthentication(user: User): Promise<User>;
 
-    existByEmail(email: any): Promise<boolean>;
+    getUserByEmail(email: any): Promise<User>;
 
     forgottenPassword(email: any): Promise<String>;
     updatePassword(id: any,oldPassword:any, newPassword: any): Promise<User>;

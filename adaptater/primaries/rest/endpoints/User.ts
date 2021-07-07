@@ -11,7 +11,7 @@ const userConfig = new UserConfig();
 
 User.get('/email/:email', (req: any, res: any) => {
     userConfig
-        .existByEmailUseCase()
+        .getUserByEmailUseCase()
         .execute(req.params.email)
         .then((user: any) => {
             return res.status(200).json(user);

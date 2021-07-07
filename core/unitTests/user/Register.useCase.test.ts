@@ -20,7 +20,7 @@ describe("Register unit test", () => {
 
     let userRepository: UserRepository = ({
         register: null,
-        existByEmail:null
+        getUserByEmail:null
     } as unknown) as UserRepository;
 
     let mailingRepository: MailingRepository =({
@@ -45,7 +45,7 @@ describe("Register unit test", () => {
         spyOn(mailingRepository, "sendMailRegister");
     });
     it("registerUseCase should return user when it succeeded", async () => {
-        spyOn(userRepository, "existByEmail").and.returnValue(false);
+        spyOn(userRepository, "getUserByEmail").and.returnValue(false);
         const result: User = await registerUseCase.execute(user, link);
         expect(result).toBeDefined();
         expect(result.email).toStrictEqual("marine.teroitin@gmail.com");
@@ -55,7 +55,7 @@ describe("Register unit test", () => {
 
     it("registerUseCase should throw a parameter exception when the email already exists", async () => {
         try {
-            spyOn(userRepository, "existByEmail").and.returnValue(true);
+            spyOn(userRepository, "getUserByEmail").and.returnValue(true);
             await registerUseCase.execute(user, link);
         } catch (error) {
             expect(error.message).toBe("Un utilisateur existe déjà avec cet email");
@@ -65,7 +65,7 @@ describe("Register unit test", () => {
     it("registerUseCase should throw a parameter exception when the email is undefined", async () => {
         user.email = undefined;
         try {
-            spyOn(userRepository, "existByEmail").and.returnValue(false);
+            spyOn(userRepository, "getUserByEmail").and.returnValue(false);
             await registerUseCase.execute(user, link);
         } catch (error) {
             expect(error.message).toBe("L'email est obligatoire");
@@ -75,7 +75,7 @@ describe("Register unit test", () => {
     it("registerUseCase should throw a parameter exception when the firstName is undefined", async () => {
         user.firstName = undefined;
         try {
-            spyOn(userRepository, "existByEmail").and.returnValue(false);
+            spyOn(userRepository, "getUserByEmail").and.returnValue(false);
             await registerUseCase.execute(user, link);
         } catch (error) {
             expect(error.message).toBe("Le prénom est obligatoire");
@@ -85,7 +85,7 @@ describe("Register unit test", () => {
     it("registerUseCase should throw a parameter exception when the firstName is less than 2 characters ", async () => {
         user.firstName = "a";
         try {
-            spyOn(userRepository, "existByEmail").and.returnValue(false);
+            spyOn(userRepository, "getUserByEmail").and.returnValue(false);
             await registerUseCase.execute(user, link);
         } catch (error) {
             expect(error.message).toBe(
@@ -97,7 +97,7 @@ describe("Register unit test", () => {
     it("registerUseCase should throw a parameter exception when the password is undefined", async () => {
         user.password = undefined;
         try {
-            spyOn(userRepository, "existByEmail").and.returnValue(false);
+            spyOn(userRepository, "getUserByEmail").and.returnValue(false);
             await registerUseCase.execute(user, link);
         } catch (error) {
             expect(error.message).toBe("Le mot de passe est obligatoire");
@@ -107,7 +107,7 @@ describe("Register unit test", () => {
     it("registerUseCase should throw a parameter exception when the password is less than 4 characters ", async () => {
         user.password = "aze";
         try {
-            spyOn(userRepository, "existByEmail").and.returnValue(false);
+            spyOn(userRepository, "getUserByEmail").and.returnValue(false);
             await registerUseCase.execute(user, link);
         } catch (error) {
             expect(error.message).toBe(
