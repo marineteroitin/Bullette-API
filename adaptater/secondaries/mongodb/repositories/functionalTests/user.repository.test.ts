@@ -15,10 +15,9 @@ describe('GET /users/email/:email', () => {
                 if (err) {
                     return done(err);
                 }
-                console.log("test email")
-                console.log(res.body.data)
-                // var data = res.body.data;
-                //  expect(data.length).toBe(3);
+
+                var user = res.body;
+                expect(user.email).toBe('marine.teroitin@gmail.com');
 
                 done();
             });

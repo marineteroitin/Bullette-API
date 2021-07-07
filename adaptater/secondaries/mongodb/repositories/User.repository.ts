@@ -10,10 +10,10 @@ export default class UserRepositoryMongodb implements UserRepository {
         return Promise.resolve("");
     }
 
-    // TODO
+
     async existByEmail(email: any): Promise<boolean> {
         try {
-            return await UserMongodb.findOne({mail: email})
+            return await UserMongodb.findOne({ email: email })
         } catch (error) {
             throw error;
         }
@@ -37,7 +37,7 @@ export default class UserRepositoryMongodb implements UserRepository {
     // TODO
     async login(email: any, password: any): Promise<User> {
         try {
-            return await UserMongodb.findOne({mail: email, password: password})
+            return await UserMongodb.findOne({ email: email, password: password })
         } catch (error) {
             throw error;
         }
@@ -51,7 +51,7 @@ export default class UserRepositoryMongodb implements UserRepository {
     // TODO
     async updateFirstName(id: any, firstName: any): Promise<User> {
         try {
-            return await UserMongodb.updateFirstName({firstName: firstName})
+            return await UserMongodb.updateFirstName({ firstName: firstName })
         } catch (error) {
             throw error;
         }
@@ -60,7 +60,7 @@ export default class UserRepositoryMongodb implements UserRepository {
     // TODO
     async updatePassword(id: any, oldPassword: any, newPassword: any): Promise<User> {
         try {
-            return await UserMongodb.findByIdAndUpdate({id: id})
+            return await UserMongodb.findByIdAndUpdate({ id: id })
         } catch (error) {
             throw error;
         }
