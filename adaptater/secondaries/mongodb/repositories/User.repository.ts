@@ -2,7 +2,7 @@ import User from '../../../../core/domain/User.domain';
 import UserRepository from '../../../../core/ports/repositories/User.repository';
 // @ts-ignore
 import UserMongodb from '../entities/User.model';
-
+const passwordEncryption = require('../encryption/passwordEncryption');
 
 export default class UserRepositoryMongodb implements UserRepository {
     // TODO
@@ -11,7 +11,7 @@ export default class UserRepositoryMongodb implements UserRepository {
     }
 
 
-    async getUserByEmail(email: any): Promise<boolean> {
+    async getUserByEmail(email: any): Promise<UserMongodb> {
         try {
             return await UserMongodb.findOne({ email: email })
         } catch (error) {
@@ -25,17 +25,17 @@ export default class UserRepositoryMongodb implements UserRepository {
     }
 
     // TODO
-    googleAuthentication(user: User): Promise<User> {
+    googleAuthentication(user: User): Promise<UserMongodb> {
         return Promise.resolve(user);
     }
 
     // TODO
-    googleRegistration(user: User): Promise<User> {
+    googleRegistration(user: User): Promise<UserMongodb> {
         return Promise.resolve(user);
     }
 
     // TODO
-    async login(email: any, password: any): Promise<User> {
+    async login(email: any, password: any): Promise<UserMongodb> {
         try {
             return await UserMongodb.findOne({ email: email, password: password })
         } catch (error) {
@@ -43,13 +43,24 @@ export default class UserRepositoryMongodb implements UserRepository {
         }
     }
 
-    // TODO
-    register(user: User): Promise<User> {
-        return Promise.resolve(user);
+    async register(user: User): Promise<UserMongodb> {
+        try{
+                const hashedPassword = await passwordEncryption.passwordEncryption(user.password);
+                const userData = new UserMongodb ({
+                    email: user.email,
+                    password: hashedPassword,
+                    firstName: user.firstName
+                });
+                return await userData.save();
+
+            } catch (error) {
+                throw error;
+            }
     }
 
+
     // TODO
-    async updateFirstName(id: any, firstName: any): Promise<User> {
+    async updateFirstName(id: any, firstName: any): Promise<UserMongodb> {
         try {
             return await UserMongodb.updateFirstName({ firstName: firstName })
         } catch (error) {
@@ -58,7 +69,7 @@ export default class UserRepositoryMongodb implements UserRepository {
     }
 
     // TODO
-    async updatePassword(id: any, oldPassword: any, newPassword: any): Promise<User> {
+    async updatePassword(id: any, oldPassword: any, newPassword: any): Promise<UserMongodb> {
         try {
             return await UserMongodb.findByIdAndUpdate({ id: id })
         } catch (error) {

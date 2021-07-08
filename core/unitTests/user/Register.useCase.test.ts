@@ -72,6 +72,16 @@ describe("Register unit test", () => {
         }
     });
 
+    it("registerUseCase should throw a parameter exception when the email is not valid", async () => {
+        user.email = 'marine.fr';
+        try {
+            spyOn(userRepository, "getUserByEmail").and.returnValue(false);
+            await registerUseCase.execute(user, link);
+        } catch (error) {
+            expect(error.message).toBe("Email invalide");
+        }
+    });
+
     it("registerUseCase should throw a parameter exception when the firstName is undefined", async () => {
         user.firstName = undefined;
         try {

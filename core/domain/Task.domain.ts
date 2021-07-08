@@ -1,6 +1,7 @@
 export default class Task {
-    name: String;
+    _id?: String;
+    name?: String;
     status?: boolean;
-    date:String;
+    date?:String;
     time?:String;
 }

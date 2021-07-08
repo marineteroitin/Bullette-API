@@ -4,6 +4,7 @@ const { app } = require('../../../../primaries/rest/server');
 
 const Seed = require('./seed-data');
 
+// get a user by email
 describe('GET /users/email/:email', () => {
     beforeEach(Seed.populateTestUsers);
 
@@ -23,3 +24,5 @@ describe('GET /users/email/:email', () => {
             });
     })
 })
+
+// TODO register

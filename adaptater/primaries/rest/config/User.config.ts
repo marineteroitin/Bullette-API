@@ -19,5 +19,4 @@ export default class UserConfig {
     public registerUseCase(): RegisterUseCase {
         return new RegisterUseCase(this.userRepository, this.mailingRepository);
     }
-
 }
