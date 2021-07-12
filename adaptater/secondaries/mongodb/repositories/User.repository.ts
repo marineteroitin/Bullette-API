@@ -2,7 +2,7 @@ import User from '../../../../core/domain/User.domain';
 import UserRepository from '../../../../core/ports/repositories/User.repository';
 // @ts-ignore
 import UserMongodb from '../entities/User.model';
-const passwordEncryption = require('../encryption/passwordEncryption');
+const passwordEncryption = require('./utils/passwordEncryption');
 
 export default class UserRepositoryMongodb implements UserRepository {
     // TODO
