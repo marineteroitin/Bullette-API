@@ -29,6 +29,12 @@ User.get('/email/:email', (req: any, res: any) => {
 User.post('/register', (req: any, res: any) => {
     var userData = _.pick(req.body, ['email', 'password', 'firstName']);
 
+    console.log("here")
+    console.log(req.body)
+   
+
+    userData.email = userData.email.toLowerCase();
+
     const rand = Math.floor(Math.random() * 100 + 54);
 
     const link = "http://" + req.get("host") + "/server/verify?id=" + rand;
@@ -44,7 +50,7 @@ User.post('/register', (req: any, res: any) => {
             }
             let accessToken = jwt.sign(tokenUser, process.env.tokenkey, { expiresIn: "1d"});
 
-            res.json(accessToken);
+            res.staus(201).json(accessToken);
         })
         .catch((err: Error) => {
             console.log(err);
