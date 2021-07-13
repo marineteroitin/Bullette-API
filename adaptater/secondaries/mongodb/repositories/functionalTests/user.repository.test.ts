@@ -1,6 +1,8 @@
+import { convertToObject } from "typescript";
+
 const request = require('supertest');
 const { app } = require('../../../../primaries/rest/server');
-//const User = require('../User.repository');
+const User = require('../../entities/User.model');
 
 const Seed = require('./seed-data');
 
@@ -25,7 +27,7 @@ describe('GET /users/email/:email', () => {
     })
 })
 
-// TODO register
+
 describe('POST /users/register', () => {
     beforeEach(Seed.populateTestUsers);
 
@@ -43,29 +45,23 @@ describe('POST /users/register', () => {
             })
             .expect(201)
             .expect((res: any) => {
+                expect(res.body.firstName).toBe(firstName);
+                expect(res.body.email).toBe(email);
+                expect(res.body.emailConfirmed).toBe(false);
 
-                console.log(res.body);
-                /* Moi cest un token et pas un user..
-                expect(res.body.data.user.firstName).toBe(user.firstName);
-                expect(res.body.data.user.lastName).toBe(user.lastName);
-                expect(res.body.data.user.email).toBe(user.email);
-                expect(res.body.data.user.password).not.toBe(user.password);
-*/
             })
             .end((err: any) => {
 
                 if (err) {
                     return done(err);
                 }
-/*
-                User.findOne({ email: 'l.teroitin@gmail.com' }).then((currentUser) => {
+
+                User.findOne({ email: 'l.teroitin@gmail.com' }).then((currentUser: any ) => {
                     expect(currentUser).toBeTruthy();
                     done();
-                }).catch((e) => {
+                }).catch((e: any) => {
                     done(e);
                 })
-*/
-done();
             });
     })
 })

@@ -29,10 +29,6 @@ User.get('/email/:email', (req: any, res: any) => {
 User.post('/register', (req: any, res: any) => {
     var userData = _.pick(req.body, ['email', 'password', 'firstName']);
 
-    console.log("here")
-    console.log(req.body)
-   
-
     userData.email = userData.email.toLowerCase();
 
     const rand = Math.floor(Math.random() * 100 + 54);
@@ -43,13 +39,6 @@ User.post('/register', (req: any, res: any) => {
         .registerUseCase()
         .execute(userData,link)
         .then((user: UserType) => {
-            const tokenUser = {
-                id: user._id,
-                email: user.email,
-                firstName: user.firstName
-            }
-            let accessToken = jwt.sign(tokenUser, process.env.tokenkey, { expiresIn: "1d"});
-
             res.status(201).json(user);
         })
         .catch((err: Error) => {
