@@ -36,7 +36,7 @@ describe('POST /users/register', () => {
 
         request(app)
             .post('/users/register')
-            .set({
+            .send({
                 email,
                 firstName,
                 password

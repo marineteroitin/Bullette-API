@@ -50,7 +50,7 @@ User.post('/register', (req: any, res: any) => {
             }
             let accessToken = jwt.sign(tokenUser, process.env.tokenkey, { expiresIn: "1d"});
 
-            res.staus(201).json(accessToken);
+            res.status(201).json(user);
         })
         .catch((err: Error) => {
             console.log(err);
